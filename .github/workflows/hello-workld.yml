@@ -1,0 +1,26 @@
+name: hello-world
+on: push
+jobs:
+  cont-integration:
+    runs-on: ubuntu-latest #github-runner
+    steps:
+      - name: pipeline init
+        run: echo "Pipeline Init"
+        
+      - name: secrets scanning
+        run: echo "secrets scanning using gitleaks"
+        
+      - name: Iac Scanning
+        run: echo "Iac Scannign using Checkov"
+        
+  cont-deployment:
+    runs-on: ubuntu-latest #github-runner
+    steps:
+      - name: Deploy Staging
+        run: echo "Deploy Staging in EKS"
+        
+      - name: Infra scanning
+        run: echo "Infra scanning using Open VAS"
+        
+      - name: Deploy Prod
+        run: echo "Deploy Prod in EKS"
