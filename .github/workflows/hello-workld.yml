@@ -7,14 +7,19 @@ jobs:
       - name: pipeline init
         run: echo "Pipeline Init"
         
-      - name: secrets scanning
-        run: echo "secrets scanning using gitleaks"
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: secrets scanning  
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Iac Scanning
         run: echo "Iac Scannign using Checkov"
         
   cont-deployment:
-    needs: [cont-integration]
     runs-on: ubuntu-latest #github-runner
     steps:
       - name: Deploy Staging
